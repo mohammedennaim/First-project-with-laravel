@@ -168,31 +168,4 @@
             transform: scale(1.1);
         }
     </style>
-
-    @push('scripts')
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                // Confirmation de suppression
-                document.querySelectorAll('.delete-form').forEach(form => {
-                    form.addEventListener('submit', function(e) {
-                        e.preventDefault();
-                        Swal.fire({
-                            title: 'Êtes-vous sûr ?',
-                            text: "Cette action est irréversible !",
-                            icon: 'warning',
-                            showCancelButton: true,
-                            confirmButtonColor: '#d33',
-                            cancelButtonColor: '#3085d6',
-                            confirmButtonText: 'Oui, supprimer!',
-                            cancelButtonText: 'Annuler'
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                this.submit();
-                            }
-                        });
-                    });
-                });
-            });
-        </script>
-    @endpush
 @endsection
