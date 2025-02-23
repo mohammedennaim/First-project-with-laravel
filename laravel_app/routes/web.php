@@ -1,17 +1,30 @@
 <?php
+
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
-// returns the home page with all posts
-Route::get('/', UserController::class .'@index')->name('users.index');
-// returns the form for adding a post
-Route::get('/users/create', UserController::class . '@create')->name('users.create');
-// adds a post to the database
-Route::post('/users', UserController::class .'@store')->name('users.store');
-// returns a page that shows a full post
-Route::get('/users/{post}', UserController::class .'@show')->name('users.show');
-// returns the form for editing a post
-Route::get('/users/{post}/edit', UserController::class .'@edit')->name('users.edit');
-// updates a post
-Route::put('/users/{post}', UserController::class .'@update')->name('users.update');
-// deletes a post
-Route::delete('/users/{post}', UserController::class .'@destroy')->name('users.destroy');
+use App\Http\Controllers\ClubController;
+use Illuminate\Support\Facades\Auth;
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth'])->name('dashboard');
+
+// require __DIR__.'/auth.php';
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::resource('clubs', ClubController::class);
